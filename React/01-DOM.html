@@ -1,0 +1,40 @@
+<!-- DOM -> Document Object Model  / Modo de que o JS ve uma pagína HTML-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script>
+
+        // Criando um parágrafo no documento usando JavaScript
+        let parag = document.createElement('p')
+        parag.textContent = 'Este paragráfo foi criado com JS'
+
+        // Captura do elemento correspondente à div ja existente, cujo id é root
+        const root = document.getElementById('root')
+
+        // Acrescenta o parágrafo na lista de elementos da div root
+        root.appendChild(parag)
+
+        // Criando nova div
+        const novaDiv = document.createElement('div')
+
+        novaDiv.textContent = 'DIV criado com JavaScript'
+        novaDiv.style.border = '3px dotten green'
+        novaDiv.style.background = 'limegreen'
+        novaDiv.style.padding = '10px'
+        novaDiv.style.marginTop = '50px'
+        novaDiv.style.textAlign = 'center'
+        novaDiv.id = 'div-verde'
+
+        root.appendChild(novaDiv)
+        
+    </script>
+
+</body>
+</html>
