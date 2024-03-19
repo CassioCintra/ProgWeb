@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soma com React</title>
+</head>
+<body>
+    
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+  <script type = "text/babel">
+    function Form(){
+        const [num1, setNum1] = React.useState('')
+        const [num2, setNum2] = React.useState('')
+
+        return(
+            <>
+                <h1>Soma de dois números</h1>
+                <form>
+                    <div>
+                        <label>
+                            <span>Primeiro Número </span>
+                            <input type = "number" 
+                            onChange= {event => setNum1(event.target.value)}/>     
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <span>Segundo Número </span>
+                            <input type = "number" 
+                            onChange= {event => setNum2(event.target.value)} />     
+                        </label>
+                    </div>
+                    <div>Soma = {Number(num1) + Number(num2)}</div>    
+                </form>
+            </>
+        )
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<Form/>)
+  </script>
+</body>
+</html>

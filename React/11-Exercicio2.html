@@ -15,7 +15,6 @@
   <div id="root"></div>
 
   <script type="text/babel">
-
     /*
       1) Crie um formulário e coloque nele um input numérico com o label "Valor em reais".
       2) Coloque outro input numérico com o label "Cotação do dólar".
@@ -28,8 +27,59 @@
       
       Este exercício contará para a nota de Participação e Assiduidade (PA).
     */
+    function Form(){
+      var valor, cotacao, convercao
+      const valorRef = React.useRef()
+      const cotacaoRef = React.useRef()
+      const convercaoRef = React.useRef()
 
-    
+      function handleChange(event){
+        valor = parseFloat(valorRef.current.value)
+        cotacao = parseFloat(cotacaoRef.current.value)
+        convercao = valor / cotacao
+        convercaoRef.current.textContent = convercao.toFixed(2);
+      }
+      
+      function handleSubmit(event){
+        event.preventDefault()
+        alert(`O valor R$${valor}, numa cotação de U$${cotacao} , representa U$${convercao}`)
+      }
+
+      return(
+        <>
+          <h1>Formulário</h1>
+          <form onSubmit = {handleSubmit}>
+            <div>
+              <label>
+                <span> Valor (R$) </span>
+                <input type = "number" ref = {valorRef} onChange = {handleChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                <span> Cotação (U$)</span>
+                <input type="number" ref={cotacaoRef} onChange={handleChange} />
+              </label>
+            </div>
+            <div>
+              <label>
+                <output type = "checkbox" ref = {convercaoRef} onClick = {handleChange} />
+                <span>Converção</span>
+              </label>
+            </div>
+            <div ref = {convercaoRef}></div>
+            <div>
+              <button type = "submit"> Enviar </button>
+            </div>
+          </form>
+        </>
+      )
+    }
+
+    const container = <> <Form/> </>
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(container)
 
   </script>
   
