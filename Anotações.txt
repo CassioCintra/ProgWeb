@@ -1,0 +1,11 @@
+npm create vite@latest
+
+Ok to proceed? y
+Project name: react-hooks
+Select a framework: React
+Select a variant: JavaScript
+
+cd react-hooks
+npm install
+npm install react-router-dom
+npm run dev
