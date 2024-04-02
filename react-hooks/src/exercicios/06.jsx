@@ -1,37 +1,32 @@
 import * as React from 'react'
-// 🐨 você vai precisar dos seguintes itens de '../pokemon':
-// fetchPokemon: a função que retorna as informações do pokémon
-// PokemonInfoFallback: o que é exibido enquanto as informações do pokémon
-// são carregadas
-// PokemonDataView: o componente usado para exibir as informações do pokémon
-import {PokemonForm} from '../pokemon'
+
+import { fetchPokemon, PokemonInfoFallback, PokemonDataView, PokemonForm} from '../pokemon'
 
 function PokemonInfo({pokemonName}) {
-  // 🐨 crie o estado para o pokémon (null)
+  const [pokemon, setPokemon] = React.useState(null)
+  const [error, setError] = React.useState(null)
+   
+  React.useEffect(() => {
+    if(!pokemonName) return
+    
+    setPokemon(null)
+    setError(null)
 
-  // 🐨 crie React.useEffect de modo a ser chamado sempre que pokemonName mudar.
-  // 💰 NÃO SE ESQUEÇA DO VETOR DE DEPENDÊNCIAS!
+    fetchPokemon(pokemonName).then( //Sucesso
+      pokemonData => setPokemon(pokemonData))
+    .catch( //Falha
+      error => setError(error))
+    
+  }, [pokemonName])
 
-  // 💰 se pokemonName é falso (ou uma string vazia) não se preocupe em fazer 
-  // a requisição (retorne precocemente).
-
-  // 🐨 antes de chamar `fetchPokemon`, limpe o estado atual do pokemon
-  // ajustando-o para null.
-
-  // (Isso é para habilitar o estado de carregamento ao alternar entre diferentes
-  // pokémon.)
-  // 💰 Use a função `fetchPokemon` para buscar um pokémon pelo seu nome:
-  //   fetchPokemon('Pikachu').then(
-  //     pokemonData => {/* atualize todos os estados aqui */},
-  //   )
-  // 🐨 return the following things based on the `pokemon` state and `pokemonName` prop:
-  // 🐨 retorne o seguinte baseado nos estados `pokemon` e `pokemonName`:
-  //   1. não há pokemonName: 'Informe um pokémon'
-  //   2. tem pokemonName mas não pokemon: <PokemonInfoFallback name={pokemonName} />
-  //   3. tem pokemon: <PokemonDataView pokemon={pokemon} />
-
-  // 💣 remova isso
-  return 'TODO'
+  if(error) return (
+    <div role='alert'>
+      <pre stryle= {{whiteSpace:'normal'}}>{error.message}</pre>
+    </div>
+  )
+  if(! pokemonName) return 'Informe um Pokémon'
+  if(pokemonName && !pokemon) return <PokemonInfoFallback name={pokemonName}/>
+  if(pokemon) return <PokemonDataView pokemon={pokemon}/>
 }
 
 function Exercicio06() {
